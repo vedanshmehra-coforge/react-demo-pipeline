@@ -11,7 +11,6 @@ pipeline {
         stage('Build & Test Node App') {
             steps {
                 echo 'Building React/Vite Application...'
-                // Added --legacy-peer-deps to bypass the ESLint version conflict
                 bat 'npm install --legacy-peer-deps'
                 bat 'npm run build'
             }
@@ -20,16 +19,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker container image...'
-                bat 'docker build -t my-demo-app:latest .'
+                bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t my-demo-app:latest .'
             }
         }
 
         stage('Deploy Container') {
             steps {
                 echo 'Stopping old container (if running) and starting new one...'
-                // Using -f forces the removal even if it's running. || exit 0 prevents the build from failing if the container didn't exist yet.
-                bat 'docker rm -f my-running-app || exit 0'
-                bat 'docker run -d --name my-running-app -p 3000:80 my-demo-app:latest'
+                bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f my-running-app || exit 0'
+                bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name my-running-app -p 3000:80 my-demo-app:latest'
             }
         }
     }
