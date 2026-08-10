@@ -27,7 +27,8 @@ pipeline {
             steps {
                 echo 'Stopping old container (if running) and starting new one...'
                 bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f my-running-app || exit 0'
-                bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name my-running-app -p 3000:80 my-demo-app:latest'
+                // Port mapping is now 3000:3000
+                bat '"C:\\Users\\vedansh\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name my-running-app -p 3000:3000 my-demo-app:latest'
             }
         }
     }

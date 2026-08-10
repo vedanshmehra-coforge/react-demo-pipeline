@@ -4,6 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    host: true, // Exposes the server to the Docker network
+    port: 3000, // Forces Vite to use port 3000
+  },
   resolve: {
     alias: {
       '@':        new URL('./src', import.meta.url).pathname,
