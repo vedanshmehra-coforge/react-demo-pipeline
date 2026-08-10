@@ -10,26 +10,25 @@ pipeline {
 
         stage('Build & Test Node App') {
             steps {
-                // Installs dependencies and verifies project builds cleanly
                 echo 'Building React/Vite Application...'
-                sh 'npm install'
-                sh 'npm run build'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker container image...'
-                sh 'docker build -t my-demo-app:latest .'
+                bat 'docker build -t my-demo-app:latest .'
             }
         }
 
         stage('Deploy Container') {
             steps {
                 echo 'Stopping old container (if running) and starting new one...'
-                sh 'docker stop my-running-app || true'
-                sh 'docker rm my-running-app || true'
-                sh 'docker run -d --name my-running-app -p 3000:80 my-demo-app:latest'
+                // Using -f forces the removal even if it's running. || exit 0 prevents the build from failing if the container didn't exist yet.
+                bat 'docker rm -f my-running-app || exit 0'
+                bat 'docker run -d --name my-running-app -p 3000:80 my-demo-app:latest'
             }
         }
     }
