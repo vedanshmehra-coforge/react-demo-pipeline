@@ -11,7 +11,8 @@ pipeline {
         stage('Build & Test Node App') {
             steps {
                 echo 'Building React/Vite Application...'
-                bat 'npm install'
+                // Added --legacy-peer-deps to bypass the ESLint version conflict
+                bat 'npm install --legacy-peer-deps'
                 bat 'npm run build'
             }
         }
