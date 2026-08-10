@@ -8,7 +8,7 @@ import { Select } from '@shared/components/ui/select';
 import { Textarea } from '@shared/components/ui/textarea';
 import { FormField } from '@shared/components/form-fields/form-field';
 import { ROUTES } from '@shared/constants/routes';
-import { cn } from '@shared/utils/cn';
+
 import { useUfaOnboardingRowsStore } from '../store/ufa-onboarding-rows.store';
 
 // -------------------------------------------------------------------------
